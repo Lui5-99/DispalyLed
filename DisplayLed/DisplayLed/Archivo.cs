@@ -8,5 +8,7 @@ namespace DisplayLed
 {
     class Archivo
     {
+        public int columnas { get; set; }
+        public int renglones { get; set; }
     }
 }
