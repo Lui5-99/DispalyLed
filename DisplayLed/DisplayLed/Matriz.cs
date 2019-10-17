@@ -10,17 +10,17 @@ namespace DisplayLed
     class Matriz
     {
         public List<int> matriz { get; set; }
-        string[] array = new string[]{ "XX" , "X0" };
-        int renglones = 2;
-        int columnas = 2;
+        string[] array = new string[] { "0000", "0XX0", "0XX0", "0000" };
+        int renglones = 4;
+        int columnas = 4;
         public void iniciarMatriz()
         {
             matriz = new List<int>();
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                for(int j = 0; j < array[i].Length; j++)
+                for (int j = 0; j < array[i].Length; j++)
                 {
-                    if(array[i][j] == 'X')
+                    if (array[i][j] == 'X')
                     {
                         matriz.Add(1);
                     }
@@ -31,24 +31,89 @@ namespace DisplayLed
                 }
             }
         }
-        
+
         public void maxYmin()
         {
-            for(int i = 1; i < renglones; i++)
+            int suma = 0;
+            for (int i = 1; i < renglones; i++)
             {
                 for (int j = 1; j < columnas; j++)
                 {
                     int indice = (i * columnas) + j;
-                    int indice_sp = indice - renglones;
+                    int indice_sp = indice - columnas;
+                    int indice_ab = indice + columnas;
                     int indice_iz = indice - 1;
-                    int indiceDiag = indice_sp - 1;
-                    
+                    int indice_Der = indice + 1;
+                    int indiceDiagSpIz = indice_sp - 1;
+                    int indiceDiagSpDer = indice_sp + 1;
+                    int indiceDiagAbDer = indice_ab + 1;
+                    int indiceDiagAbIz = indice_ab - 1;
+                    if (matriz[indice] == 1)
+                    {
+                        suma = matriz[indice] + matriz[indice_sp] + matriz[indice_iz];
+                    }
                 }
             }
-                   
+            Console.WriteLine(suma);
         }
-        public void buscarRenctangulos()
+        public void validarRectangulos()
         {
+            if (validarEsquinaInfDer() == true && validarEsquinaInfIzq() && validarEsquinaSupDer() && validarEsquinaSupIzq())
+            {
+                Console.WriteLine("Rectangulos validos");
+            }
+            else
+            {
+                Console.WriteLine("Rectangulos no validos");
+            }
+
+        }
+        public void agregarRenglon()
+        {
+
+            for (int i = 0; i < columnas; i++)
+            {
+                matriz.Insert(0, 0);
+            }
+            renglones += 1;
+        }
+        public void agregarRenglonDer()
+        {
+            for (int i = 0; i < columnas; i++)
+            {
+                matriz.Insert((i * columnas) + columnas + i, 0);
+            }
+            columnas += 1;
+        }
+        public void agregarRenglonAb()
+        {
+            for (int i = 0; i < columnas; i++)
+            {
+                matriz.Add(0);
+            }
+            renglones += 1;
+        }
+        public void agregarColumna()
+        {
+
+            for (int i = 0; i < renglones; i++)
+            {
+
+                matriz.Insert((i * columnas) + i, 0);
+            }
+            columnas += 1;
+        }
+        public void imprimirMatriz()
+        {
+            for (int i = 0; i < matriz.Count; i++)
+            {
+                Console.Write(matriz[i] + " ");
+            }
+            Console.WriteLine("");
+        }
+        public bool validarEsquinaInfDer()
+        {
+            bool estado = false;
             for (int i = 1; i < renglones; i++)
             {
                 for (int j = 1; j < columnas; j++)
@@ -56,39 +121,93 @@ namespace DisplayLed
                     int indice = (i * columnas) + j;
                     int indice_sp = indice - columnas;
                     int indice_iz = indice - 1;
-                    int indiceDiag = indice_sp - 1;
-                    if ((matriz[indice_iz] == 1 && matriz[indice_sp] == 1 && matriz[indice] == 0))
+                    int indiceDiagIzqSp = indice_sp - 1;
+                    if (matriz[indice_iz] == 1 && matriz[indice_sp] == 1 && matriz[indiceDiagIzqSp] == 1 && matriz[indice] == 0)
                     {
-                        Console.WriteLine("Matriz no valida");
+                        estado = false;
+                    }
+                    else if (matriz[indice_iz] == 1 && matriz[indice_sp] == 1 && matriz[indiceDiagIzqSp] == 1 && matriz[indice] == 1)
+                    {
+                        estado = true;
                     }
                 }
             }
+            return estado;
         }
-        public void agregarRenglon()
+        public bool validarEsquinaInfIzq()
         {
-            
-            for(int i = 0; i < columnas; i++)
+            bool estado = false;
+            for (int i = 1; i < renglones; i++)
             {
-                matriz.Insert(0, 0);
+                for (int j = 1; j < (columnas - 1); j++)
+                {
+                    int indice = (i * columnas) + j;
+                    int indice_sp = indice - columnas;
+                    int indice_iz = indice - 1;
+                    int indice_der = indice + 1;
+                    int indiceDiagDerSp = indice_sp + 1;
+                    if (matriz[indice_der] == 1 && matriz[indice_sp] == 1 && matriz[indiceDiagDerSp] == 1 && matriz[indice] == 0)
+                    {
+                        estado = false;
+                    }
+                    else if (matriz[indice_der] == 1 && matriz[indice_sp] == 1 && matriz[indiceDiagDerSp] == 1 && matriz[indice] == 1)
+                    {
+                        estado = true;
+                    }
+                }
             }
-            renglones += 1;
+            return estado;
         }
-        public void agregarColumna()
+        public bool validarEsquinaSupDer()
         {
-            
-            for(int i = 0; i < renglones; i++)
+            bool estado = false;
+            for (int i = 1; i < renglones - 1; i++)
             {
-                
-                matriz.Insert((i*columnas)+i, 0);
+                for (int j = 1; j < (columnas - 1); j++)
+                {
+                    int indice = (i * columnas) + j;
+                    int indice_sp = indice - columnas;
+                    int indice_iz = indice - 1;
+                    int indice_der = indice + 1;
+                    int indice_ab = indice + columnas;
+                    int indiceDiagIzAb = indice_ab - 1;
+                    if (matriz[indice_iz] == 1 && matriz[indice_ab] == 1 && matriz[indiceDiagIzAb] == 1 && matriz[indice] == 0)
+                    {
+                        estado = false;
+                    }
+                    if (matriz[indice_iz] == 1 && matriz[indice_ab] == 1 && matriz[indiceDiagIzAb] == 1 && matriz[indice] == 1)
+                    {
+                        estado = true;
+                    }
+                }
             }
+            return estado;
         }
-        public void imprimirMatriz()
+        public bool validarEsquinaSupIzq()
         {
-            for(int i = 0; i < matriz.Count; i++)
+            bool estado = false;
+            for (int i = 1; i < renglones - 1; i++)
             {
-                Console.Write(matriz[i] + " ");
+                for (int j = 1; j < (columnas - 1); j++)
+                {
+                    int indice = (i * columnas) + j;
+                    int indice_sp = indice - columnas;
+                    int indice_iz = indice - 1;
+                    int indice_der = indice + 1;
+                    int indice_ab = indice + columnas;
+                    int indiceDiagDerAb = indice_ab + 1;
+                    if (matriz[indice_der] == 1 && matriz[indice_ab] == 1 && matriz[indiceDiagDerAb] == 1 && matriz[indice] == 0)
+                    {
+                        estado = false;
+                    }
+                    else if (matriz[indice_der] == 1 && matriz[indice_ab] == 1 && matriz[indiceDiagDerAb] == 1 && matriz[indice] == 1)
+                    {
+                        estado = true;
+                    }
+                }
             }
+            return estado;
         }
-        
+
     }
 }

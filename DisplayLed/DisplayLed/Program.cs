@@ -13,10 +13,13 @@ namespace DisplayLed
         {
             Matriz matriz = new Matriz();
             matriz.iniciarMatriz();
-            //matriz.agregarRenglon();
+            matriz.agregarRenglon();
             matriz.agregarColumna();
-            matriz.buscarRenctangulos();
+            matriz.agregarRenglonDer();
+            matriz.agregarRenglonAb();
+            matriz.validarRectangulos();
             matriz.imprimirMatriz();
+            matriz.maxYmin();
             Console.ReadKey();
         }
     }
