@@ -13,8 +13,9 @@ namespace DisplayLed
         {
             Matriz matriz = new Matriz();
             matriz.iniciarMatriz();
-            matriz.agregarRenglon();
+            //matriz.agregarRenglon();
             matriz.agregarColumna();
+            matriz.buscarRenctangulos();
             matriz.imprimirMatriz();
             Console.ReadKey();
         }

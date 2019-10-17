@@ -10,7 +10,7 @@ namespace DisplayLed
     class Matriz
     {
         public List<int> matriz { get; set; }
-        string[] array = new string[]{ "0X" , "0X" };
+        string[] array = new string[]{ "XX" , "X0" };
         int renglones = 2;
         int columnas = 2;
         public void iniciarMatriz()
@@ -32,41 +32,61 @@ namespace DisplayLed
             }
         }
         
-        public void recorrerMatriz()
+        public void maxYmin()
         {
-            for(int i = 1; i < columnas; i++)
+            for(int i = 1; i < renglones; i++)
             {
-                for (int j = 1; j < renglones; j++)
+                for (int j = 1; j < columnas; j++)
                 {
-                    int indice = (i * renglones) + i;
-                    int indice_sp = indice - columnas;
+                    int indice = (i * columnas) + j;
+                    int indice_sp = indice - renglones;
                     int indice_iz = indice - 1;
+                    int indiceDiag = indice_sp - 1;
+                    
                 }
             }
                    
         }
+        public void buscarRenctangulos()
+        {
+            for (int i = 1; i < renglones; i++)
+            {
+                for (int j = 1; j < columnas; j++)
+                {
+                    int indice = (i * columnas) + j;
+                    int indice_sp = indice - columnas;
+                    int indice_iz = indice - 1;
+                    int indiceDiag = indice_sp - 1;
+                    if ((matriz[indice_iz] == 1 && matriz[indice_sp] == 1 && matriz[indice] == 0))
+                    {
+                        Console.WriteLine("Matriz no valida");
+                    }
+                }
+            }
+        }
         public void agregarRenglon()
         {
+            
             for(int i = 0; i < columnas; i++)
             {
                 matriz.Insert(0, 0);
             }
-
+            renglones += 1;
         }
         public void agregarColumna()
         {
-            int indice = 0;
+            
             for(int i = 0; i < renglones; i++)
             {
-                indice = (i * columnas) + i;
-                matriz.Insert(indice, 0);
+                
+                matriz.Insert((i*columnas)+i, 0);
             }
         }
         public void imprimirMatriz()
         {
             for(int i = 0; i < matriz.Count; i++)
             {
-                Console.WriteLine(matriz[i]);
+                Console.Write(matriz[i] + " ");
             }
         }
         
