@@ -1,0 +1,20 @@
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\es\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Casos de prueba.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Casos de prueba.pdb
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\DisplayLed.exe
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\DisplayLed.pdb
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\DisplayLed.exe.config
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\obj\Debug\Casos de prueba.csprojAssemblyReference.cache
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\obj\Debug\Casos de prueba.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\obj\Debug\Casos de prueba.csproj.CopyComplete
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\obj\Debug\Casos de prueba.dll
+C:\Users\Lenovo\Desktop\Git\DispalyLed\DisplayLed\Casos de prueba\obj\Debug\Casos de prueba.pdb
