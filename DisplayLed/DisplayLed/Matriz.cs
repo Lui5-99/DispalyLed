@@ -3,36 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 
 namespace DisplayLed
 {
-    class Matriz
+    public class Matriz
     {
-        public List<int> matriz { get; set; }
-        string[] array = new string[] { "0000", "0XX0", "0XX0", "0000" };
-        int renglones = 4;
-        int columnas = 4;
-        public void iniciarMatriz()
+        public List<int> matriz = new List<int>();
+        int columnas = 0;
+        int renglones = 0;
+        public void colYren(string[] array)
         {
-            matriz = new List<int>();
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array[i].Length; j++)
                 {
-                    if (array[i][j] == 'X')
+                    columnas = array[i].Length;
+                }
+                renglones = (array.Length);
+            }
+
+        }
+        public void iniciarMatriz(string[] array)
+        {
+            if (array.Length > 0)
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    for (int j = 0; j < array[i].Length; j++)
                     {
-                        matriz.Add(1);
-                    }
-                    else
-                    {
-                        matriz.Add(0);
+                        if (array[i][j] == 'X')
+                        {
+                            matriz.Add(1);
+                        }
+                        else
+                        {
+                            matriz.Add(0);
+                        }
                     }
                 }
+
+            }
+            else
+            {
+                throw new Exception("Matriz Vacia");
             }
         }
-
-        public void maxYmin()
+        public void agruparAreas()
         {
             int suma = 0;
             for (int i = 1; i < renglones; i++)
@@ -48,25 +64,62 @@ namespace DisplayLed
                     int indiceDiagSpDer = indice_sp + 1;
                     int indiceDiagAbDer = indice_ab + 1;
                     int indiceDiagAbIz = indice_ab - 1;
-                    if (matriz[indice] == 1)
+                    if (matriz[indice] > 0)
                     {
-                        suma = matriz[indice] + matriz[indice_sp] + matriz[indice_iz];
+                        suma = matriz[indice] + matriz[indice_iz] + matriz[indice_sp];
+                        matriz[indice] = suma;
+                        matriz[indice_iz] = 0;
+                        matriz[indice_sp] = 0;
                     }
+
                 }
             }
-            Console.WriteLine(suma);
         }
-        public void validarRectangulos()
+        public void eliminarCeros()
         {
-            if (validarEsquinaInfDer() == true && validarEsquinaInfIzq() && validarEsquinaSupDer() && validarEsquinaSupIzq())
+            for (int i = matriz.Count - 1; i >= 0; i--)
             {
-                Console.WriteLine("Rectangulos validos");
+                if (matriz[i] == 0)
+                {
+                    matriz.RemoveAt(i);
+                }
+            }
+        }
+        public int max()
+        {
+            int max = matriz.Max();
+            return max;
+        }
+        public int min()
+        {
+            int min = 0;
+            if (matriz.Count > 1)
+            {
+                min = matriz.Min();
             }
             else
             {
-                Console.WriteLine("Rectangulos no validos");
+                min = 0;
             }
-
+            return min;
+        }
+        public bool validarRectangulos()
+        {
+            bool estado = true;
+            if (validarEsquinaInfDer() && validarEsquinaInfIzq() &&
+                validarEsquinaSupDer() && validarEsquinaSupIzq())
+            {
+                estado = true;
+            }
+            else if (linea())
+            {
+                estado = true;
+            }
+            else
+            {
+                estado = false;
+            }
+            return estado;
         }
         public void agregarRenglon()
         {
@@ -77,11 +130,12 @@ namespace DisplayLed
             }
             renglones += 1;
         }
-        public void agregarRenglonDer()
+        public void agregarColumnaDer()
         {
-            for (int i = 0; i < columnas; i++)
+            for (int i = 0; i < renglones; i++)
             {
-                matriz.Insert((i * columnas) + columnas + i, 0);
+                int indice = (i * columnas) + columnas + i;
+                matriz.Insert(indice, 0);
             }
             columnas += 1;
         }
@@ -208,6 +262,28 @@ namespace DisplayLed
             }
             return estado;
         }
-
+        public bool linea()
+        {
+            bool estado = true;
+            for (int i = 1; i < renglones; i++)
+            {
+                for (int j = 0; j < columnas; j++)
+                {
+                    int indice = (i * columnas) + j;
+                    int indice_iz = indice - 1;
+                    int indice_der = indice + 1;
+                    if (matriz[indice] == 1 && (matriz[indice_iz] == 1 || matriz[indice_der] == 1))
+                    {
+                        estado = true;
+                    }
+                    else
+                    {
+                        estado = false;
+                    }
+                }
+            }
+            return estado;
+        }
     }
 }
+

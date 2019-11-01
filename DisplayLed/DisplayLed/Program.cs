@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 
 namespace DisplayLed
 {
@@ -12,14 +11,28 @@ namespace DisplayLed
         static void Main(string[] args)
         {
             Matriz matriz = new Matriz();
-            matriz.iniciarMatriz();
+            Archivo archivo = new Archivo();
+            archivo.leerArchivo();
+            string[] lista = archivo.enviar();
+            matriz.colYren(lista);
+            matriz.iniciarMatriz(lista);
             matriz.agregarRenglon();
             matriz.agregarColumna();
-            matriz.agregarRenglonDer();
+            matriz.agregarColumnaDer();
             matriz.agregarRenglonAb();
-            matriz.validarRectangulos();
-            matriz.imprimirMatriz();
-            matriz.maxYmin();
+            if (matriz.validarRectangulos())
+            {
+                //matriz.imprimirMatriz();
+                matriz.agruparAreas();
+                matriz.eliminarCeros();
+                //matriz.imprimirMatriz();
+                Console.WriteLine(matriz.max());
+                Console.WriteLine(matriz.min());
+            }
+            else
+            {
+                Console.WriteLine("Matriz no valida");
+            }
             Console.ReadKey();
         }
     }

@@ -10,6 +10,9 @@ namespace DisplayLed
 {
     class Archivo
     {
+        public string[] matriz;
+        public List<string> mat = new List<string>();
+        StreamReader archivo = new StreamReader("C:\\Users\\Lenovo\\Desktop\\Escritorio\\Ingenieria en software\\7o\\Lenguajes y Automatas\\Tarea Doc\\prueba.txt");
         public void ValidarExtension(string ruta)
         {
             string extension = System.IO.Path.GetExtension(ruta); //Devuelve la extensión de la ruta especificada
@@ -34,7 +37,7 @@ namespace DisplayLed
                 using (StreamReader sr = new StreamReader(ruta))
                 {
                     if (sr.Peek() > 0)
-                        LeerArchivo(ruta);
+                        leerArchivo();
                     else
                         Console.WriteLine("El archivo está vacío");
                 }
@@ -46,33 +49,28 @@ namespace DisplayLed
 
         }
 
-        public void LeerArchivo(string ruta)
+        public void leerArchivo()
         {
-            List<string> ledsLista = new List<string>();
-            //string[] ledsMatriz = new string[0];
-            Regex simbolosValidos = new Regex("^[0-X]{1,300}$");
-
-            try
+            Regex validar = new Regex("^[0X]{1,300}$");
+            Regex invalido = new Regex("^[0X]{ 0, 0 }$");
+            while (!archivo.EndOfStream)
             {
-                using (StreamReader sr = new StreamReader(ruta))
+                string linea = archivo.ReadLine();
+                if (validar.IsMatch(linea))
                 {
-                    string linea;
-                    while ((linea = sr.ReadLine()) != null)
-                    {
-                        if (simbolosValidos.IsMatch(linea))
-                            ledsLista.Add(linea);
-                        else
-                            Console.WriteLine("Hay simbolos no válidos en el archivo");
-                    }
-                    string[] ledsArreglo = ledsLista.ToArray();
-                    Console.WriteLine(ledsArreglo[0]);
+                    mat.Add(linea);
                 }
+                else if (invalido.IsMatch(linea))
+                {
+                    Console.WriteLine("Mátriz invalida");
+                }
+                matriz = mat.ToArray();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("El archivo no pudo ser leído");
-                Console.WriteLine(e.Message);
-            }
+
+        }
+        public string[] enviar()
+        {
+            return matriz;
         }
 
     }
