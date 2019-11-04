@@ -23,32 +23,25 @@ namespace DisplayLed
             }
 
         }
-        public void iniciarMatriz(string[] array)
+        public List<int> iniciarMatriz(string[] array)
         {
-            if (array.Length > 0)
+            for (int i = 0; i < array.Length; i++)
             {
-                for (int i = 0; i < array.Length; i++)
+                for (int j = 0; j < array[i].Length; j++)
                 {
-                    for (int j = 0; j < array[i].Length; j++)
+                    if (array[i][j] == 'X')
                     {
-                        if (array[i][j] == 'X')
-                        {
-                            matriz.Add(1);
-                        }
-                        else
-                        {
-                            matriz.Add(0);
-                        }
+                        matriz.Add(1);
+                    }
+                    else
+                    {
+                        matriz.Add(0);
                     }
                 }
-
             }
-            else
-            {
-                throw new Exception("Matriz Vacia");
-            }
+            return matriz;
         }
-        public void agruparAreas()
+        public List<int> agruparAreas(List<int> matriz)
         {
             int suma = 0;
             for (int i = 1; i < renglones; i++)
@@ -71,11 +64,11 @@ namespace DisplayLed
                         matriz[indice_iz] = 0;
                         matriz[indice_sp] = 0;
                     }
-
                 }
             }
+            return matriz;
         }
-        public void eliminarCeros()
+        public List<int> eliminarCeros()
         {
             for (int i = matriz.Count - 1; i >= 0; i--)
             {
@@ -84,6 +77,7 @@ namespace DisplayLed
                     matriz.RemoveAt(i);
                 }
             }
+            return matriz;
         }
         public int max()
         {
@@ -103,15 +97,14 @@ namespace DisplayLed
             }
             return min;
         }
-        public bool validarRectangulos()
+        public bool validarRectangulos(bool esquina1, bool esquina2, bool esquina3, bool esquina4)
         {
-            bool estado = true;
-            if (validarEsquinaInfDer() && validarEsquinaInfIzq() &&
-                validarEsquinaSupDer() && validarEsquinaSupIzq())
-            {
-                estado = true;
-            }
-            else if (linea())
+            esquina1 = validarEsquinaInfDer(matriz);
+            esquina2 = validarEsquinaInfIzq(matriz);
+            esquina3 = validarEsquinaSupDer(matriz);
+            esquina4 = validarEsquinaSupIzq(matriz);
+            bool estado = false;
+            if (esquina1 && esquina2 && esquina3 && esquina4)
             {
                 estado = true;
             }
@@ -120,6 +113,14 @@ namespace DisplayLed
                 estado = false;
             }
             return estado;
+        }
+        public List<int> bordearMatriz(List<int> matriz)
+        {
+            agregarRenglon();
+            agregarColumna();
+            agregarColumnaDer();
+            agregarRenglonAb();
+            return matriz;
         }
         public void agregarRenglon()
         {
@@ -165,7 +166,7 @@ namespace DisplayLed
             }
             Console.WriteLine("");
         }
-        public bool validarEsquinaInfDer()
+        public bool validarEsquinaInfDer(List<int> matriz)
         {
             bool estado = false;
             for (int i = 1; i < renglones; i++)
@@ -188,7 +189,7 @@ namespace DisplayLed
             }
             return estado;
         }
-        public bool validarEsquinaInfIzq()
+        public bool validarEsquinaInfIzq(List<int> matriz)
         {
             bool estado = false;
             for (int i = 1; i < renglones; i++)
@@ -212,7 +213,7 @@ namespace DisplayLed
             }
             return estado;
         }
-        public bool validarEsquinaSupDer()
+        public bool validarEsquinaSupDer(List<int> matriz)
         {
             bool estado = false;
             for (int i = 1; i < renglones - 1; i++)
@@ -237,7 +238,7 @@ namespace DisplayLed
             }
             return estado;
         }
-        public bool validarEsquinaSupIzq()
+        public bool validarEsquinaSupIzq(List<int> matriz)
         {
             bool estado = false;
             for (int i = 1; i < renglones - 1; i++)
@@ -286,4 +287,3 @@ namespace DisplayLed
         }
     }
 }
-
