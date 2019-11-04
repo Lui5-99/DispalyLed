@@ -15,15 +15,16 @@ namespace DisplayLed
             archivo.leerArchivo();
             string[] lista = archivo.enviar();
             matriz.colYren(lista);
-            matriz.iniciarMatriz(lista);
-            matriz.agregarRenglon();
-            matriz.agregarColumna();
-            matriz.agregarColumnaDer();
-            matriz.agregarRenglonAb();
-            if (matriz.validarRectangulos())
+            List<int> iniciar = matriz.iniciarMatriz(lista);
+            List<int> mat = matriz.bordearMatriz(iniciar);
+            bool esquina1 = matriz.validarEsquinaInfDer(mat);
+            bool esquina2 = matriz.validarEsquinaInfIzq(mat);
+            bool esquina3 = matriz.validarEsquinaSupDer(mat);
+            bool esquina4 = matriz.validarEsquinaSupIzq(mat);
+            if (matriz.validarRectangulos(esquina1, esquina2, esquina3, esquina4))
             {
+                matriz.agruparAreas(mat);
                 //matriz.imprimirMatriz();
-                matriz.agruparAreas();
                 matriz.eliminarCeros();
                 //matriz.imprimirMatriz();
                 Console.WriteLine(matriz.max());
